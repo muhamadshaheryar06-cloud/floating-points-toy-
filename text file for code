@@ -1,0 +1,127 @@
+10: 8FA0
+11: 8EA1
+12: 7C0F
+13: 61FC
+14: 7B01
+15: 311B
+16: 7C0A
+17: 63FC
+18: 7B1F
+19: 333B
+1A: 7B0F
+1B: 7C06
+1C: 5BBC
+1D: 7C3F
+1E: 4BBC
+1F: 35FB
+20: 7B04
+21: 7C08
+22: 5BBC
+23: 455B
+24: 7C0F
+25: 62EC
+26: 7B01
+27: 322B
+28: 7C0A
+29: 64EC
+2A: 7B1F
+2B: 344B
+2C: 7B0F
+2D: 7C06
+2E: 5BBC
+2F: 7C3F
+30: 4BBC
+31: 36EB
+32: 7B04
+33: 7C08
+34: 5BBC
+35: 466B
+36: 2734
+37: D73C
+38: 2743
+39: 6557
+3A: 1340
+3B: C03F
+3C: 2734
+3D: 6667
+3E: 1430
+3F: 2712
+40: C749
+41: 2756
+42: D746
+43: 2865
+44: 1A20
+45: C04B
+46: 1870
+47: 1A10
+48: C04B
+49: 1856
+4A: 1A10
+4B: 1930
+4C: 7B08
+4D: 7C08
+4E: 5BBC
+4F: 278B
+50: D752
+51: C055
+52: 7C01
+53: 688C
+54: 199C
+55: 7B04
+56: 7C08
+57: 5BBC
+58: 378B
+59: D75E
+5A: 7C01
+5B: 688C
+5C: 299C
+5D: C055
+5E: 7C0F
+5F: 5FAC
+60: 7C0A
+61: 579C
+62: 4FF7
+63: 7B0F
+64: 7C06
+65: 5BBC
+66: 7C3F
+67: 4BBC
+68: 378B
+69: 4FF7
+6A: 9FA2
+6B: 0000
+A0: 4680
+A1: 4100
+A2: 4880
+
+
+
+
+10: 8FA0    // Load first floating-point number (A)
+11: 8EA1    // Load second floating-point number (B)
+
+12-1F       // ----- Extract A -----
+             // Get exponent
+             // Get mantissa
+             // Restore implicit leading 1
+
+20-31       // ----- Extract B -----
+             // Get exponent
+             // Get mantissa
+             // Restore implicit leading 1
+
+32-49       // ----- Alignment -----
+             // Compare exponents
+             // Shift smaller mantissa
+             // Repeat until equal
+
+4A-5D       // ----- Arithmetic + Normalize -----
+             // Add mantissas
+             // Normalize if overflow
+
+5E-6A       // ----- Packing -----
+             // Remove hidden bit
+             // Combine sign + exponent + mantissa
+             // Write result
+
+6B: 0000    // End program
